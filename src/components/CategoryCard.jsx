@@ -20,6 +20,7 @@ export function CategoryCard({ category }) {
             onClick={(e) => {
               deleteCategory(id);
               toast.dismiss(t.id);
+              window.location.reload();
             }}
           >
             aceptar

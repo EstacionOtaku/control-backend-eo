@@ -2,29 +2,30 @@ import { BiMessageEdit } from "react-icons/bi";
 import { MdDeleteForever } from "react-icons/md";
 import { BsDoorOpen } from "react-icons/bs";
 import toast from "react-hot-toast";
-import { useAnime } from "../context/animeContext";
+import { useSeasons } from "../context/seasonContext";
 import { useNavigate } from "react-router-dom";
 
-export function AnimeCard({ anime }) {
-  const { deleteAnime } = useAnime();
+export function SeasonCard({ season }) {
+  const { deleteSeason } = useSeasons();
   const navigate = useNavigate();
 
   const handleDelete = (id) => {
     toast((t) => (
       <div>
         <p>
-        Estas seguro que quieres eliminar <strong>{id}</strong>{" "}
+          Estas seguro que quieres eliminar <strong>{id}</strong>
         </p>
         <div>
           <button
             onClick={(e) => {
-              deleteAnime(id);
+              deleteSeason(id);
               toast.dismiss(t.id);
               window.location.reload();
             }}
-          >Aceptar
+          >
+            aceptar
           </button>
-          <button onClick={(e) => toast.dismiss(t.id)}> Cancelar </button>
+          <button onClick={(e) => toast.dismiss(t.id)}> Cancel </button>
         </div>
       </div>
     ));
@@ -33,33 +34,32 @@ export function AnimeCard({ anime }) {
   return (
     <div>
       <div className="cards-components">
-        <h3>{anime.name}</h3>
-        <p>{anime.description}</p>
+        <h3>{season.name}</h3>
+        <p>{season.description}</p>
 
         <div className="button-crud-container">
           <button
             className="button-crud"
-            onClick={() => navigate(`/anime/${anime.id}`)}
+            onClick={() => navigate(`/season/${season.id}`)}
           >
             <BiMessageEdit className="button-crud-ico__edit" />
           </button>
-
-        <button
-          className="button-crud"
-          onClick={(e) => {
-            e.stopPropagation();
-            handleDelete(anime.id);
-          }}
-        >
-          <MdDeleteForever className="button-crud-ico__delete" />
-        </button>
-        <button
+          <button
             className="button-crud"
-            onClick={() => navigate("/anime/seasons")}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDelete(season.id);
+            }}
+          >
+            <MdDeleteForever className="button-crud-ico__delete" />
+          </button>
+          <button
+            className="button-crud"
+            onClick={() => navigate("/season/episodes")}
           >
             <BsDoorOpen className="button-crud-ico__open" />
           </button>
-      </div>
+        </div>
       </div>
     </div>
   );

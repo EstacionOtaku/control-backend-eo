@@ -17,7 +17,7 @@ export function HomePage() {
 
   return (
     <>
-      <h2>Categories</h2>
+      <h2>Categorias</h2>
       <Link to="/category/new">Crear una categoría nueva</Link>
       <div className="cards-container">
         {categories.map((category) => (
